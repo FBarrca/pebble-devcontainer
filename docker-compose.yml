@@ -3,6 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+    platform: linux/amd64
     container_name: pebble-sdk-container
     restart: unless-stopped
     volumes:
@@ -16,7 +19,7 @@ services:
       - NVM_DIR=/home/pebble/.nvm
       - DISPLAY=${DISPLAY}  # Enable GUI for emulator
     ports:
-      - "59443:59443"  # Required for emulator 
+      - "59443:59443"  # Required for emulator
     network_mode: "host"  # Required for proper emulator display on some systems
     working_dir: /workspace
     stdin_open: true
