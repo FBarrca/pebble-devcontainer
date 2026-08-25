@@ -16,7 +16,9 @@ ENV NVM_DIR=/home/pebble/.nvm
 ENV PATH="${NVM_DIR}/versions/node/v${NODE_VERSION}/bin:/opt/${PEBBLE_TOOL_VERSION}/bin:$PATH"
 
 # Update system and install required dependencies
-RUN apt-get update && \
+RUN echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security buster/updates main" >> /etc/apt/sources.list && \
+    apt-get -o Acquire::Check-Valid-Until=false update && \
     apt-get install -y --no-install-recommends \
         curl \
         libfreetype6-dev \
